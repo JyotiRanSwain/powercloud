@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="images/logo.png">
+  <title>PowerCloud – Affordable Software & Cloud Solutions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <style>
+    :root{--bg:#07090f;--surface:#0e1220;--card:#131828;--border:#1e2640;--accent:#3b82f6;--accent2:#06b6d4;--green:#22c55e;--orange:#f97316;--text:#e8ecf5;--muted:#7c8aaa;--white:#ffffff;--font-head:'Syne',sans-serif;--font-body:'DM Sans',sans-serif;--radius:14px;--glow:0 0 60px rgba(59,130,246,.18);}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:16px;line-height:1.7;overflow-x:hidden;}
+    img{display:block;max-width:100%;}a{text-decoration:none;color:inherit;}
+    .cursor-dot,.cursor-ring{position:fixed;top:0;left:0;pointer-events:none;z-index:9999;border-radius:50%;transform:translate(-50%,-50%);}
+    .cursor-dot{width:8px;height:8px;background:var(--accent);}
+    .cursor-ring{width:32px;height:32px;border:1.5px solid rgba(59,130,246,.5);transition:width .2s,height .2s,border-color .2s;}
+    ::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--accent);border-radius:99px;}
+    .container{max-width:1140px;margin:0 auto;padding:0 24px;}
+    .section{padding:100px 0;}
+    .section-label{font-family:var(--font-head);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;}
+    .section-title{font-family:var(--font-head);font-size:clamp(2rem,4vw,3rem);font-weight:800;line-height:1.15;color:var(--white);margin-bottom:18px;}
+    .section-sub{color:var(--muted);max-width:560px;font-size:1.05rem;}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border-radius:8px;font-family:var(--font-head);font-weight:600;font-size:.95rem;cursor:pointer;transition:all .22s ease;border:none;letter-spacing:.02em;}
+    .btn-primary{background:var(--accent);color:var(--white);box-shadow:0 0 24px rgba(59,130,246,.35);}
+    .btn-primary:hover{background:#2563eb;transform:translateY(-2px);}
+    .btn-outline{background:transparent;color:var(--text);border:1.5px solid var(--border);}
+    .btn-outline:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px);}
+    .btn-green{background:#16a34a;color:#fff;box-shadow:0 0 24px rgba(34,197,94,.3);}
+    .btn-green:hover{background:#15803d;transform:translateY(-2px);}
+    .tag{display:inline-block;padding:4px 12px;border-radius:99px;font-size:.78rem;font-family:var(--font-head);font-weight:600;background:rgba(59,130,246,.12);color:var(--accent);border:1px solid rgba(59,130,246,.25);}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+    #navbar{position:fixed;top:0;left:0;right:0;z-index:900;padding:18px 0;transition:all .3s ease;}
+    #navbar.scrolled{background:rgba(7,9,15,.88);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);padding:12px 0;}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;}
+    .nav-logo{font-family:var(--font-head);font-weight:800;font-size:1.35rem;color:var(--white);display:flex;align-items:center;gap:10px;}
+    .logo-icon{width:36px;height:36px;background:var(--accent);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:#fff;}
+    .nav-links{display:flex;align-items:center;gap:28px;list-style:none;}
+    .nav-links a{font-size:.88rem;color:var(--muted);transition:color .2s;font-weight:500;}
+    .nav-links a:hover{color:var(--white);}
+    .nav-cta{display:flex;align-items:center;gap:10px;}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;}
+    .hamburger span{display:block;width:24px;height:2px;background:var(--text);border-radius:2px;}
+    .mobile-menu{display:none;flex-direction:column;background:var(--surface);border-bottom:1px solid var(--border);padding:20px 24px;gap:16px;}
+    .mobile-menu a{color:var(--muted);font-size:.95rem;}
+    .mobile-menu.open{display:flex;}
+    #hero{min-height:100vh;display:flex;align-items:center;padding-top:90px;position:relative;overflow:hidden;}
+    .hero-glow{position:absolute;top:-100px;right:-200px;width:700px;height:700px;background:radial-gradient(circle,rgba(59,130,246,.13) 0%,transparent 70%);pointer-events:none;}
+    .hero-glow2{position:absolute;bottom:-200px;left:-150px;width:500px;height:500px;background:radial-gradient(circle,rgba(6,182,212,.08) 0%,transparent 70%);pointer-events:none;}
+    .hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:99px;background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.2);font-size:.8rem;color:var(--accent);margin-bottom:24px;font-family:var(--font-head);font-weight:600;}
+    .hero-badge .dot{width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pdot 1.5s infinite;}
+    @keyframes pdot{0%,100%{opacity:1}50%{opacity:.3}}
+    .hero-title{font-family:var(--font-head);font-size:clamp(2.4rem,5vw,3.8rem);font-weight:800;line-height:1.1;color:var(--white);margin-bottom:20px;}
+    .highlight{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+    .hero-sub{color:var(--muted);font-size:1.1rem;margin-bottom:32px;max-width:480px;}
+    .hero-tags{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:36px;}
+    .hero-btns{display:flex;gap:14px;flex-wrap:wrap;}
+    .hero-visual{position:relative;display:flex;align-items:center;justify-content:center;}
+    .hero-card-main{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:32px;width:100%;max-width:380px;box-shadow:var(--glow);animation:float 4s ease-in-out infinite;}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+    .hero-card-title{font-family:var(--font-head);font-size:1.1rem;font-weight:700;color:var(--white);margin-bottom:20px;}
+    .stat-row{display:flex;gap:10px;margin-bottom:20px;}
+    .stat-box{flex:1;background:var(--surface);border-radius:10px;padding:14px 10px;text-align:center;}
+    .stat-val{font-family:var(--font-head);font-size:1.5rem;font-weight:800;color:var(--accent);}
+    .stat-lbl{font-size:.72rem;color:var(--muted);}
+    .mini-bar{height:4px;border-radius:99px;background:var(--border);overflow:hidden;margin-bottom:8px;}
+    .mini-bar-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--accent2));}
+    .mini-bar-label{display:flex;justify-content:space-between;font-size:.75rem;color:var(--muted);}
+    .floating-badge{position:absolute;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:10px 16px;font-size:.8rem;font-weight:600;color:var(--white);box-shadow:0 8px 32px rgba(0,0,0,.4);font-family:var(--font-head);}
+    .fb1{top:-20px;right:-30px;animation:float 3s ease-in-out infinite .5s;}
+    .fb2{bottom:-10px;left:-30px;animation:float 3.5s ease-in-out infinite 1s;}
+    #about{background:var(--surface);}
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+    .about-img-wrap{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:4/3;background:linear-gradient(135deg,var(--card),var(--border));display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:var(--muted);font-size:4rem;}
+    .about-img-wrap p{font-size:.85rem;font-family:var(--font-head);}
+    .about-corner{position:absolute;width:60px;height:60px;border-color:var(--accent);border-style:solid;}
+    .about-corner.tl{top:-2px;left:-2px;border-width:3px 0 0 3px;border-radius:6px 0 0 0;}
+    .about-corner.br{bottom:-2px;right:-2px;border-width:0 3px 3px 0;border-radius:0 0 6px 6px;}
+    .exp-pills{display:flex;flex-wrap:wrap;gap:10px;margin:24px 0;}
+    .pill{padding:6px 16px;border-radius:99px;font-size:.83rem;font-family:var(--font-head);font-weight:600;background:var(--card);border:1px solid var(--border);color:var(--text);}
+    .mission-box{background:var(--card);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;padding:18px 22px;margin-top:24px;color:var(--muted);font-size:.95rem;}
+    .mission-box strong{color:var(--white);}
+    #services{background:var(--bg);}
+    .section-center{text-align:center;margin-bottom:56px;}
+    .section-center .section-sub{margin:0 auto;}
+    .service-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:36px 28px;transition:all .3s ease;}
+    .service-card:hover{border-color:rgba(59,130,246,.4);box-shadow:var(--glow);transform:translateY(-6px);}
+    .service-icon{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:22px;}
+    .ic-blue{background:rgba(59,130,246,.15);}
+    .ic-cyan{background:rgba(6,182,212,.15);}
+    .ic-orange{background:rgba(249,115,22,.15);}
+    .service-name{font-family:var(--font-head);font-weight:700;font-size:1.15rem;color:var(--white);margin-bottom:10px;}
+    .service-desc{color:var(--muted);font-size:.9rem;margin-bottom:20px;}
+    .service-list{list-style:none;display:flex;flex-direction:column;gap:8px;}
+    .service-list li{font-size:.88rem;color:var(--text);display:flex;align-items:flex-start;gap:8px;}
+    .service-list li::before{content:"→";color:var(--accent);flex-shrink:0;}
+    #product{background:var(--surface);}
+    .product-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+    .product-badge{display:inline-block;padding:4px 14px;background:rgba(249,115,22,.15);color:var(--orange);border:1px solid rgba(249,115,22,.3);border-radius:99px;font-size:.8rem;font-family:var(--font-head);font-weight:600;margin-bottom:20px;}
+    .product-title{font-family:var(--font-head);font-weight:800;font-size:clamp(1.8rem,3vw,2.6rem);color:var(--white);margin-bottom:16px;}
+    .product-features{display:flex;flex-direction:column;gap:14px;margin:28px 0;}
+    .pf-item{display:flex;align-items:flex-start;gap:14px;}
+    .pf-icon{width:36px;height:36px;border-radius:8px;background:rgba(34,197,94,.12);color:var(--green);display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0;}
+    .pf-text strong{color:var(--white);font-size:.95rem;display:block;}
+    .pf-text span{color:var(--muted);font-size:.85rem;}
+    .product-screen{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 40px 80px rgba(0,0,0,.5);}
+    .screen-bar{background:var(--surface);padding:12px 16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border);}
+    .dot-r{width:10px;height:10px;border-radius:50%;background:#ef4444;}
+    .dot-y{width:10px;height:10px;border-radius:50%;background:#f59e0b;}
+    .dot-g{width:10px;height:10px;border-radius:50%;background:#22c55e;}
+    .screen-title{font-size:.8rem;color:var(--muted);margin-left:8px;font-family:var(--font-head);}
+    .screen-body{padding:24px;}
+    .bill-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+    .bill-row .item{color:var(--text);}
+    .bill-row .amount{color:var(--accent);font-family:var(--font-head);font-weight:600;}
+    .bill-total{display:flex;justify-content:space-between;margin-top:16px;padding:14px;background:rgba(59,130,246,.08);border-radius:8px;border:1px solid rgba(59,130,246,.2);}
+    .bill-total .label{font-family:var(--font-head);font-weight:700;color:var(--white);}
+    .bill-total .value{font-family:var(--font-head);font-weight:800;color:var(--accent);font-size:1.1rem;}
+    #learning{background:var(--bg);}
+    .learning-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;}
+    .learn-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:32px;transition:all .3s;}
+    .learn-card:hover{border-color:rgba(59,130,246,.4);box-shadow:var(--glow);transform:translateY(-4px);}
+    .learn-icon{font-size:2.5rem;margin-bottom:16px;}
+    .learn-title{font-family:var(--font-head);font-weight:700;color:var(--white);font-size:1.15rem;margin-bottom:8px;}
+    .learn-desc{color:var(--muted);font-size:.9rem;margin-bottom:20px;}
+    .yt-embed{border-radius:10px;overflow:hidden;margin:12px 0;aspect-ratio:16/9;}
+    .yt-embed iframe{width:100%;height:100%;border:none;}
+    #testimonials{background:var(--surface);}
+    .testi-cards{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+    .testi-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:32px;transition:all .3s;}
+    .testi-card:hover{border-color:rgba(59,130,246,.35);transform:translateY(-4px);}
+    .testi-stars{color:#f59e0b;font-size:1.1rem;margin-bottom:16px;letter-spacing:2px;}
+    .testi-text{color:var(--muted);font-size:.95rem;margin-bottom:20px;line-height:1.7;font-style:italic;}
+    .testi-author{display:flex;align-items:center;gap:12px;}
+    .testi-avatar{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-weight:700;color:#fff;font-size:1rem;}
+    .testi-name{font-family:var(--font-head);font-weight:600;color:var(--white);font-size:.95rem;}
+    .testi-role{color:var(--muted);font-size:.8rem;}
+    .testi-link{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:.82rem;color:var(--accent);font-family:var(--font-head);}
+    .testi-link:hover{text-decoration:underline;}
+    #contact{background:var(--bg);}
+    .contact-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:48px;}
+    .contact-info h3{font-family:var(--font-head);font-weight:700;color:var(--white);font-size:1.3rem;margin-bottom:20px;}
+    .contact-item{display:flex;align-items:flex-start;gap:14px;margin-bottom:22px;}
+    .ci-icon{width:42px;height:42px;border-radius:10px;background:var(--card);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+    .ci-label{font-size:.8rem;color:var(--muted);font-family:var(--font-head);text-transform:uppercase;letter-spacing:.05em;}
+    .ci-value{color:var(--text);font-size:.95rem;}
+    .contact-btns{display:flex;flex-direction:column;gap:12px;margin-top:28px;}
+    .contact-form{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:36px;}
+    .form-title{font-family:var(--font-head);font-weight:700;color:var(--white);font-size:1.2rem;margin-bottom:24px;}
+    .form-group{margin-bottom:18px;}
+    .form-label{font-size:.82rem;color:var(--muted);font-family:var(--font-head);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;display:block;}
+    .form-input,.form-textarea{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px 16px;color:var(--text);font-family:var(--font-body);font-size:.95rem;outline:none;transition:border-color .2s;}
+    .form-input:focus,.form-textarea:focus{border-color:var(--accent);}
+    .form-textarea{resize:vertical;min-height:110px;}
+    .form-grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+    .submit-btn{width:100%;padding:14px;border-radius:8px;background:var(--accent);color:#fff;border:none;font-family:var(--font-head);font-weight:700;font-size:1rem;cursor:pointer;transition:all .22s;box-shadow:0 0 24px rgba(59,130,246,.3);}
+    .submit-btn:hover{background:#2563eb;transform:translateY(-2px);}
+    .floating-actions{position:fixed;bottom:28px;right:24px;display:flex;flex-direction:column;gap:12px;z-index:800;}
+    .fab{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .25s;box-shadow:0 4px 20px rgba(0,0,0,.4);border:none;text-decoration:none;}
+    .fab-wa{background:#25d366;color:#fff;}
+    .fab-wa:hover{transform:scale(1.12);background:#128C7E;}
+    .fab-call{background:var(--accent);color:#fff;}
+    .fab-call:hover{transform:scale(1.12);}
+    .fab-wrap{position:relative;display:flex;align-items:center;}
+    .fab-tip{position:absolute;right:62px;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:4px 10px;font-size:.75rem;color:var(--text);white-space:nowrap;font-family:var(--font-head);opacity:0;pointer-events:none;transition:opacity .2s;top:50%;transform:translateY(-50%);}
+    .fab-wrap:hover .fab-tip{opacity:1;}
+    footer{background:var(--surface);border-top:1px solid var(--border);padding:60px 0 32px;}
+    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px;}
+    .footer-brand p{color:var(--muted);font-size:.9rem;margin-top:14px;max-width:280px;line-height:1.7;}
+    .footer-col h4{font-family:var(--font-head);font-weight:700;color:var(--white);font-size:.95rem;margin-bottom:16px;}
+    .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
+    .footer-col ul li a{color:var(--muted);font-size:.88rem;transition:color .2s;}
+    .footer-col ul li a:hover{color:var(--accent);}
+    .footer-divider{height:1px;background:var(--border);margin-bottom:24px;}
+    .footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+    .footer-bottom p{color:var(--muted);font-size:.85rem;}
+    .footer-socials{display:flex;gap:14px;}
+    .social-btn{width:36px;height:36px;border-radius:8px;background:var(--card);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.9rem;transition:all .2s;color:var(--muted);}
+    .social-btn:hover{border-color:var(--accent);color:var(--accent);}
+    .cta-banner{background:linear-gradient(135deg,rgba(59,130,246,.12),rgba(6,182,212,.08));border:1px solid rgba(59,130,246,.2);border-radius:20px;padding:60px 48px;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;margin:80px 0;}
+    .cta-banner h2{font-family:var(--font-head);font-weight:800;font-size:clamp(1.5rem,3vw,2.2rem);color:var(--white);max-width:500px;}
+    .cta-btns{display:flex;gap:14px;flex-wrap:wrap;flex-shrink:0;}
+    .divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);}
+    .reveal{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease;}
+    .reveal.visible{opacity:1;transform:translateY(0);}
+    .d1{transition-delay:.1s;}.d2{transition-delay:.2s;}.d3{transition-delay:.3s;}
+    @media(max-width:900px){
+      .hero-inner,.about-grid,.product-inner,.contact-grid,.testi-cards,.learning-grid{grid-template-columns:1fr;}
+      .grid-3{grid-template-columns:1fr;}
+      .footer-grid{grid-template-columns:1fr 1fr;}
+      .nav-links,.nav-cta{display:none;}
+      .hamburger{display:flex;}
+      .hero-visual{display:none;}
+      .cta-banner{text-align:center;justify-content:center;}
+    }
+    @media(max-width:560px){.section{padding:64px 0;}.footer-grid{grid-template-columns:1fr;}.form-grid2{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+<div class="cursor-dot" id="cd"></div>
+<div class="cursor-ring" id="cr"></div>
+<!-- Floating Buttons -->
+<div class="floating-actions">
+  <div class="fab-wrap">
+    <a class="fab fab-wa" href="https://wa.me/919777777777" target="_blank">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+    <span class="fab-tip">WhatsApp Us</span>
+  </div>
+  <div class="fab-wrap">
+    <a class="fab fab-call" href="tel:+919777777777">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C9.6 21 3 14.4 3 6c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+    </a>
+    <span class="fab-tip">Call Us</span>
+  </div>
+</div>
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo"><img src="images/logo.png" alt="PowerCloud Logo" style="height:42px;width:auto;object-fit:contain;display:block;"></a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li><li><a href="#services">Services</a></li>
+        <li><a href="#product">Product</a></li><li><a href="#learning">Resources</a></li>
+        <li><a href="#testimonials">Clients</a></li><li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="https://wa.me/919777777777" class="btn btn-outline" target="_blank">&#128172; WhatsApp</a>
+        <a href="powercloud-bill-app.html" class="btn btn-primary" target="_blank">Download App</a>
+      </div>
+      <div class="hamburger" id="ham"><span></span><span></span><span></span></div>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mmenu">
+    <a href="#about">About</a><a href="#services">Services</a><a href="#product">Product</a>
+    <a href="#learning">Resources</a><a href="#testimonials">Clients</a><a href="#contact">Contact</a>
+    <a href="https://wa.me/919777777777" target="_blank">&#128172; WhatsApp</a>
+    <a href="powercloud-bill-app.html" target="_blank">&#11015; Download App</a>
+  </div>
+</nav>
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-glow"></div><div class="hero-glow2"></div>
+  <div class="container">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-badge"><span class="dot"></span>Now Available — PowerCloud Bill App v2.0</div>
+        <h1 class="hero-title">Affordable <span class="highlight">Software &amp; Cloud</span> Solutions for Small Businesses</h1>
+        <p class="hero-sub">From GST billing to full cloud infrastructure — we help small businesses go digital at a price they can actually afford.</p>
+        <div class="hero-tags">
+          <span class="tag">&#9989; GST Billing Software</span>
+          <span class="tag">&#9729; AWS &amp; DevOps</span>
+          <span class="tag">&#127760; Web Development</span>
+          <span class="tag">&#128187; Custom Software</span>
+        </div>
+        <div class="hero-btns">
+          <a href="powercloud-bill-app.html" class="btn btn-primary" target="_blank">&#11015; Download Billing App</a>
+          <a href="#contact" class="btn btn-outline">&#128222; Get Free Consultation</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-card-main">
+          <div class="hero-card-title">&#9889; PowerCloud Dashboard</div>
+          <div class="stat-row">
+            <div class="stat-box"><div class="stat-val">120+</div><div class="stat-lbl">Bills Today</div></div>
+            <div class="stat-box"><div class="stat-val">&#8377;4.2L</div><div class="stat-lbl">Revenue</div></div>
+            <div class="stat-box"><div class="stat-val">99%</div><div class="stat-lbl">Uptime</div></div>
+          </div>
+          <div style="margin-bottom:10px">
+            <div class="mini-bar-label"><span>GST Filed</span><span>87%</span></div>
+            <div class="mini-bar"><div class="mini-bar-fill" style="width:87%"></div></div>
+          </div>
+          <div>
+            <div class="mini-bar-label"><span>AWS Infra Health</span><span>100%</span></div>
+            <div class="mini-bar"><div class="mini-bar-fill" style="width:100%"></div></div>
+          </div>
+        </div>
+        <div class="floating-badge fb1">&#128640; AWS Ready</div>
+        <div class="floating-badge fb2">&#129534; GST Compliant</div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+<!-- ABOUT -->
+<section id="about" class="section">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img-wrap reveal">
+        <!-- Place your photo: <img src="images/founder.jpg" alt="Founder" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"> -->
+        <span style="font-size:4rem">&#128104;&#8205;&#128187;</span>
+        <p>DevOps &amp; AWS Engineer</p>
+        <div class="about-corner tl"></div>
+        <div class="about-corner br"></div>
+      </div>
+      <div class="reveal d1">
+        <div class="section-label">About Us</div>
+        <h2 class="section-title">Built by an Engineer,<br>Made for Businesses</h2>
+        <p class="section-sub">I am a DevOps &amp; AWS Engineer with hands-on experience building cloud infrastructure, automating deployments, and creating desktop applications that solve real business problems for small businesses across India.</p>
+        <div class="exp-pills">
+          <span class="pill">&#9729; AWS Cloud</span><span class="pill">&#128295; DevOps &amp; CI/CD</span>
+          <span class="pill">&#128051; Docker</span><span class="pill">&#128187; Desktop Apps</span>
+          <span class="pill">&#128202; Automation</span><span class="pill">&#127760; Web Development</span>
+        </div>
+        <div class="mission-box">
+          <strong>Our Mission:</strong> Helping small businesses and freelancers <strong>go digital at low cost</strong> — without compromising on quality. Every business deserves enterprise-grade technology at a small-business-friendly price.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+<!-- SERVICES -->
+<section id="services" class="section">
+  <div class="container">
+    <div class="section-center reveal">
+      <div class="section-label">What We Do</div>
+      <h2 class="section-title">Our Services</h2>
+      <p class="section-sub">From websites to cloud infrastructure and custom software — we cover your full digital journey.</p>
+    </div>
+    <div class="grid-3">
+      <div class="service-card reveal">
+        <div class="service-icon ic-blue">&#127760;</div>
+        <div class="service-name">Website Development</div>
+        <div class="service-desc">Professional websites that represent your brand and convert visitors into customers.</div>
+        <ul class="service-list">
+          <li>Business &amp; corporate websites</li><li>Portfolio &amp; personal websites</li>
+          <li>Landing pages &amp; microsites</li><li>Hosting &amp; domain support</li>
+          <li>SEO-ready &amp; mobile-first design</li>
+        </ul>
+      </div>
+      <div class="service-card reveal d1">
+        <div class="service-icon ic-cyan">&#9729;</div>
+        <div class="service-name">DevOps &amp; AWS Services</div>
+        <div class="service-desc">End-to-end cloud setup, automation, and monitoring so your infrastructure runs without worry.</div>
+        <ul class="service-list">
+          <li>CI/CD setup (Jenkins, GitHub Actions)</li><li>Docker &amp; container deployment</li>
+          <li>AWS EC2, S3, Security &amp; WAF</li><li>Monitoring: Prometheus &amp; Grafana</li>
+          <li>Infrastructure cost optimization</li>
+        </ul>
+      </div>
+      <div class="service-card reveal d2">
+        <div class="service-icon ic-orange">&#128187;</div>
+        <div class="service-name">Desktop Applications</div>
+        <div class="service-desc">Custom offline apps that help you run your business without depending on internet.</div>
+        <ul class="service-list">
+          <li>GST billing software</li><li>Custom offline desktop apps</li>
+          <li>Excel-based automation tools</li><li>Inventory &amp; stock management</li>
+          <li>Data entry &amp; reporting systems</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- CTA Banner -->
+<div class="container">
+  <div class="cta-banner reveal">
+    <h2>Need a free consultation? Let's talk about your project. &#128640;</h2>
+    <div class="cta-btns">
+      <a href="https://wa.me/919777777777" class="btn btn-green" target="_blank">&#128172; Chat on WhatsApp</a>
+      <a href="#contact" class="btn btn-outline">Book Consultation</a>
+    </div>
+  </div>
+</div>
+<div class="divider"></div>
+<!-- PRODUCT -->
+<section id="product" class="section">
+  <div class="container">
+    <div class="product-inner">
+      <div class="reveal">
+        <div class="product-badge">&#11088; Featured Product</div>
+        <h2 class="product-title">PowerCloud Bill App</h2>
+        <p class="section-sub">A complete GST billing solution built specifically for small businesses, shops, and freelancers across India.</p>
+        <div class="product-features">
+          <div class="pf-item"><div class="pf-icon">&#129534;</div><div class="pf-text"><strong>GST-Compliant Invoicing</strong><span>Generate GSTIN invoices instantly with auto tax calculation</span></div></div>
+          <div class="pf-item"><div class="pf-icon">&#128230;</div><div class="pf-text"><strong>Inventory Management</strong><span>Track stock levels and get low-stock alerts automatically</span></div></div>
+          <div class="pf-item"><div class="pf-icon">&#128202;</div><div class="pf-text"><strong>Reports &amp; Analytics</strong><span>Sales reports, GST summaries, and profit tracking at a glance</span></div></div>
+          <div class="pf-item"><div class="pf-icon">&#128274;</div><div class="pf-text"><strong>Works Offline</strong><span>No internet required — your data stays local and safe</span></div></div>
+        </div>
+        <a href="powercloud-bill-app.html" class="btn btn-primary" target="_blank">Go to PowerCloud Bill App &#8594;</a>
+      </div>
+      <div class="reveal d1">
+        <div class="product-screen">
+          <div class="screen-bar"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span><span class="screen-title">PowerCloud Bill App</span></div>
+          <div class="screen-body">
+            <div style="font-family:var(--font-head);font-weight:700;color:var(--white);margin-bottom:4px;font-size:1rem;">Invoice #PC-2024-089</div>
+            <div style="font-size:.78rem;color:var(--muted);margin-bottom:18px;">Customer: Rajesh Medical Store</div>
+            <div class="bill-row"><span class="item">Paracetamol 500mg &times; 10</span><span class="amount">&#8377; 85.00</span></div>
+            <div class="bill-row"><span class="item">Vitamin C Tablets &times; 5</span><span class="amount">&#8377; 120.00</span></div>
+            <div class="bill-row"><span class="item">Antiseptic Cream &times; 2</span><span class="amount">&#8377; 240.00</span></div>
+            <div class="bill-row"><span class="item">GST (18%)</span><span class="amount">&#8377; 81.90</span></div>
+            <div class="bill-total"><span class="label">Total Amount</span><span class="value">&#8377; 526.90</span></div>
+            <div style="margin-top:16px;display:flex;gap:10px;">
+              <div style="flex:1;padding:10px;background:rgba(34,197,94,.1);border-radius:8px;border:1px solid rgba(34,197,94,.2);text-align:center;font-size:.78rem;color:var(--green);font-family:var(--font-head);font-weight:600;">&#9989; GST Filed</div>
+              <div style="flex:1;padding:10px;background:rgba(59,130,246,.1);border-radius:8px;border:1px solid rgba(59,130,246,.2);text-align:center;font-size:.78rem;color:var(--accent);font-family:var(--font-head);font-weight:600;">&#128424; Print PDF</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+<!-- LEARNING -->
+<section id="learning" class="section">
+  <div class="container">
+    <div class="section-center reveal">
+      <div class="section-label">Learning &amp; Resources</div>
+      <h2 class="section-title">Free Knowledge for Everyone</h2>
+      <p class="section-sub">Study materials, tutorials, and DevOps guides — completely free from the PowerCloud team.</p>
+    </div>
+    <div class="learning-grid">
+      <div class="learn-card reveal">
+        <div class="learn-icon">&#128218;</div>
+        <div class="learn-title">PowerCloud Study Materials</div>
+        <div class="learn-desc">In-depth notes on AWS, DevOps, Linux, Docker, and more. Perfect for beginners and professionals looking to upskill.</div>
+        <a href="https://sites.google.com/view/powercloud/" class="btn btn-outline" target="_blank">&#128073; Browse Study Notes</a>
+      </div>
+      <div class="learn-card reveal d1">
+        <div class="learn-icon">&#127916;</div>
+        <div class="learn-title">YouTube DevOps Tutorials</div>
+        <div class="learn-desc">Practical, no-nonsense DevOps and AWS tutorials. Learn by doing with real-world examples.</div>
+        <div class="yt-embed">
+          <iframe src="https://www.youtube.com/embed?listType=user_uploads&list=PowerCloud-cn6yg" allowfullscreen title="PowerCloud YouTube Channel"></iframe>
+        </div>
+        <a href="https://www.youtube.com/@PowerCloud-cn6yg" class="btn btn-outline" target="_blank" style="margin-top:8px">&#9654; Visit YouTube Channel</a>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+<!-- TESTIMONIALS -->
+<section id="testimonials" class="section">
+  <div class="container">
+    <div class="section-center reveal">
+      <div class="section-label">Happy Clients</div>
+      <h2 class="section-title">Trusted by Real Businesses</h2>
+      <p class="section-sub">We've helped local businesses across India go digital. Here's what they have to say.</p>
+    </div>
+    <div class="testi-cards">
+      <div class="testi-card reveal">
+        <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="testi-text">"PowerCloud built our dental care website exactly how we envisioned it. Clean, professional, and patients love finding us online now. The whole process was smooth and affordable."</div>
+        <div class="testi-author">
+          <div class="testi-avatar">SD</div>
+          <div><div class="testi-name">Swarna Dental Care</div><div class="testi-role">Dental Clinic, Odisha</div></div>
+        </div>
+        <a href="https://jyotiranswain.github.io/swarna-dental-care/" class="testi-link" target="_blank">&#128279; View Website &#8594;</a>
+      </div>
+      <div class="testi-card reveal d1">
+        <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="testi-text">"Our food brand needed an online presence and PowerCloud delivered a beautiful website. Customer orders and inquiries have increased significantly since launch. Highly recommended!"</div>
+        <div class="testi-author">
+          <div class="testi-avatar">KF</div>
+          <div><div class="testi-name">Kirav Flavours</div><div class="testi-role">Food &amp; Beverage Brand</div></div>
+        </div>
+        <a href="https://jyotiranswain.github.io/kirav-flavours/" class="testi-link" target="_blank">&#128279; View Website &#8594;</a>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+<!-- CONTACT -->
+<section id="contact" class="section">
+  <div class="container">
+    <div class="section-center reveal">
+      <div class="section-label">Get In Touch</div>
+      <h2 class="section-title">Book a Free Consultation</h2>
+      <p class="section-sub">Whether it's a new website, billing software, or cloud setup — let's talk. No cost, no commitment.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="reveal">
+        <h3>Contact Information</h3>
+        <div class="contact-item">
+          <div class="ci-icon">&#128231;</div>
+          <div><div class="ci-label">Email</div><div class="ci-value"><a href="mailto:powercloud@gmail.com" style="color:var(--accent)">powercloud@gmail.com</a></div></div>
+        </div>
+        <div class="contact-item">
+          <div class="ci-icon">&#128241;</div>
+          <div><div class="ci-label">Mobile</div><div class="ci-value"><a href="tel:+919777777777" style="color:var(--accent)">+91 9777777777</a></div></div>
+        </div>
+        <div class="contact-item">
+          <div class="ci-icon">&#128172;</div>
+          <div><div class="ci-label">WhatsApp</div><div class="ci-value">Quick replies, available daily</div></div>
+        </div>
+        <div class="contact-item">
+          <div class="ci-icon">&#128205;</div>
+          <div><div class="ci-label">Location</div><div class="ci-value">India &#127470;&#127475; — Serving clients nationwide</div></div>
+        </div>
+        <div class="contact-btns">
+          <a href="https://wa.me/919777777777" class="btn btn-green" target="_blank">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Chat on WhatsApp
+          </a>
+          <a href="tel:+919777777777" class="btn btn-outline">&#128222; Call: +91 9777777777</a>
+        </div>
+      </div>
+      <div class="contact-form reveal d1">
+        <div class="form-title">&#128221; Send Us a Message</div>
+        <div class="form-grid2">
+          <div class="form-group"><label class="form-label">Your Name</label><input class="form-input" type="text" placeholder="e.g. Ramesh Patel" /></div>
+          <div class="form-group"><label class="form-label">Phone Number</label><input class="form-input" type="tel" placeholder="+91 9XXXXXXXXX" /></div>
+        </div>
+        <div class="form-group"><label class="form-label">Email Address</label><input class="form-input" type="email" placeholder="your@email.com" /></div>
+        <div class="form-group">
+          <label class="form-label">What do you need?</label>
+          <select class="form-input" style="cursor:pointer">
+            <option value="">Select a service…</option>
+            <option>GST Billing Software</option><option>Website Development</option>
+            <option>AWS &amp; DevOps Setup</option><option>Custom Software</option>
+            <option>Free Consultation</option>
+          </select>
+        </div>
+        <div class="form-group"><label class="form-label">Tell Us More</label><textarea class="form-textarea" placeholder="Briefly describe your project or requirement…"></textarea></div>
+        <button class="submit-btn" onclick="handleForm(this)">&#128640; Book Free Consultation</button>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#hero" class="nav-logo" style="font-size:1.2rem"><img src="images/logo.png" alt="PowerCloud Logo" style="height:38px;width:auto;object-fit:contain;display:block;"></a>
+        <p>Affordable Software &amp; Cloud Solutions for Small Businesses in India. From billing apps to full cloud infrastructure — we've got you covered.</p>
+        <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap">
+          <a href="https://wa.me/919777777777" class="btn btn-green" target="_blank" style="padding:8px 16px;font-size:.82rem">&#128172; WhatsApp</a>
+          <a href="tel:+919777777777" class="btn btn-outline" style="padding:8px 16px;font-size:.82rem">&#128222; Call Us</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Website Development</a></li><li><a href="#services">DevOps &amp; AWS</a></li>
+          <li><a href="#services">Desktop Applications</a></li><li><a href="#services">GST Billing Software</a></li>
+          <li><a href="#services">Custom Software</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#about">About Us</a></li><li><a href="#product">Our Product</a></li>
+          <li><a href="#testimonials">Clients</a></li><li><a href="#learning">Resources</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="powercloud-bill-app.html" target="_blank">&#11015; Download App</a></li>
+          <li><a href="https://www.youtube.com/@PowerCloud-cn6yg" target="_blank">&#9654; YouTube</a></li>
+          <li><a href="https://sites.google.com/view/powercloud/" target="_blank">&#128218; Study Materials</a></li>
+          <li><a href="mailto:powercloud@gmail.com">&#128231; Email Us</a></li>
+          <li><a href="tel:+919777777777">&#128222; +91 9777777777</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">
+      <p>&#169; 2024 PowerCloud. Made with &#10084; in India &#127470;&#127475; | Built by PowerCloud — DevOps &amp; AWS Engineer</p>
+      <div class="footer-socials">
+        <a href="https://www.youtube.com/@PowerCloud-cn6yg" class="social-btn" target="_blank">&#9654;</a>
+        <a href="https://wa.me/919777777777" class="social-btn" target="_blank">&#128172;</a>
+        <a href="mailto:powercloud@gmail.com" class="social-btn">&#9993;</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script>
+  const cd=document.getElementById('cd'),cr=document.getElementById('cr');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+  (function anim(){cd.style.cssText+=`left:${mx}px;top:${my}px;`;rx+=(mx-rx)*.12;ry+=(my-ry)*.12;cr.style.cssText+=`left:${rx}px;top:${ry}px;`;requestAnimationFrame(anim);})();
+  document.querySelectorAll('a,button').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{cr.style.width='48px';cr.style.height='48px';cr.style.borderColor='rgba(59,130,246,.8)';});
+    el.addEventListener('mouseleave',()=>{cr.style.width='32px';cr.style.height='32px';cr.style.borderColor='rgba(59,130,246,.5)';});
+  });
+  const nb=document.getElementById('navbar');
+  window.addEventListener('scroll',()=>nb.classList.toggle('scrolled',scrollY>60));
+  document.getElementById('ham').addEventListener('click',()=>document.getElementById('mmenu').classList.toggle('open'));
+  document.querySelectorAll('#mmenu a').forEach(a=>a.addEventListener('click',()=>document.getElementById('mmenu').classList.remove('open')));
+  const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}}),{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+  function handleForm(btn){
+    const inputs=btn.closest('form')||btn.closest('.contact-form');
+    const name=document.querySelector('.form-input[type="text"]')?.value||'';
+    const phone=document.querySelector('.form-input[type="tel"]')?.value||'';
+    const email=document.querySelector('.form-input[type="email"]')?.value||'';
+    const service=document.querySelector('.form-input[style]')?.value||document.querySelector('select')?.value||'';
+    const msg=document.querySelector('.form-textarea')?.value||'';
+    if(!name||!email){alert('Please fill in your name and email.');return;}
+    const text=`Hi PowerCloud! 👋\nName: ${name}\nPhone: ${phone}\nEmail: ${email}\nService: ${service}\nMessage: ${msg}`;
+    window.open('https://wa.me/919777777777?text='+encodeURIComponent(text),'_blank');
+    btn.textContent='✅ Sent! We will reply shortly.';
+    setTimeout(()=>{btn.textContent='🚀 Book Free Consultation';},4000);
+  }
+</script></body>
+</html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PowerCloud Bill – GST Billing Software for India</title>
+<title>PowerCloud Bill – GST Billing Software for Indian Business Firm</title>
  <!-- ✅ Favicon (ADD THIS FILE) -->
 <link rel="icon" href="images/logo.png" type="image/x-icon">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -462,7 +462,7 @@
 <section class="hero" id="top">
   <div class="hero-bg"></div>
   <div class="hero-badge"><span class="dot"></span>Now Available — Version 1.0</div>
-  <h1>GST Billing Made <span class="highlight">Simple</span> for Indian Shopkeepers</h1>
+  <h1>GST Billing Made <span class="highlight">Simple</span> for Indian Business Firms</h1>
   <p>Offline-first, fast &amp; easy billing software designed for Windows. No internet needed, no monthly subscription headaches.</p>
   <div class="hero-cta">
     <a class="btn-primary" href="https://github.com/JyotiRanSwain/powercloud-bill/releases/download/v1.0.0/PowerCloudBillApp_Setup_v1.0.0.exe">
@@ -602,29 +602,82 @@
 <div class="modal-overlay" id="buyModal" onclick="handleModalOverlayClick(event)">
   <div class="modal-box">
     <button class="modal-close" onclick="closeBuyModal()">✕</button>
-    <div class="modal-plan-badge" id="modalBadge">📦 Annual License</div>
-    <h3>Complete Your Purchase</h3>
-    <p class="modal-sub">We'll send your details directly to our team via WhatsApp to complete the order.</p>
-    <div class="modal-price-row">
-      <div class="modal-price-big" id="modalPrice">₹999</div>
-      <div class="modal-price-small" id="modalPriceSub">/ year</div>
-    </div>
-    <div class="form-group">
-      <label for="buyName">Full Name *</label>
-      <input type="text" id="buyName" placeholder="e.g. Ramesh Kumar" required>
-    </div>
-    <div class="form-group">
-      <label for="buyAddress">Address / City *</label>
-      <input type="text" id="buyAddress" placeholder="e.g. Salt Lake, Kolkata">
-    </div>
-    <div class="form-group">
-      <label for="buyEmail">Email ID *</label>
-      <input type="email" id="buyEmail" placeholder="yourname@email.com" required>
-    </div>
-    <button class="modal-submit" onclick="submitBuyModal()">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.862L.054 23.5l5.805-1.522A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.895 0-3.663-.518-5.176-1.418l-.371-.22-3.444.903.919-3.352-.242-.386A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-      Send on WhatsApp &amp; Proceed
-    </button>
+    <div class="modal-cols">
+
+      <!-- LEFT: Form -->
+      <div class="modal-col-left">
+        <div class="modal-plan-badge" id="modalBadge">📦 Annual License</div>
+        <h3>Complete Your Purchase</h3>
+        <p class="modal-sub">Scan the QR code to pay, then fill in your details and UTR number and send to our team on WhatsApp.</p>
+        <div class="modal-price-row">
+          <div class="modal-price-big" id="modalPrice">₹999</div>
+          <div class="modal-price-small" id="modalPriceSub">/ year</div>
+        </div>
+        <div class="form-group">
+          <label for="buyName">Full Name *</label>
+          <input type="text" id="buyName" placeholder="e.g. Ramesh Kumar" required>
+        </div>
+        <div class="form-group">
+          <label for="buyAddress">Address / City *</label>
+          <input type="text" id="buyAddress" placeholder="e.g. Salt Lake, Kolkata">
+        </div>
+        <div class="form-group">
+          <label for="buyEmail">Email ID *</label>
+          <input type="email" id="buyEmail" placeholder="yourname@email.com" required>
+        </div>
+        <div class="form-group">
+          <label for="buyUTR">UTR / Transaction ID *</label>
+          <input type="text" id="buyUTR" class="utr-field" placeholder="e.g. 425612345678 (after payment)" required>
+        </div>
+        <button class="modal-submit" onclick="submitBuyModal()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.862L.054 23.5l5.805-1.522A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.895 0-3.663-.518-5.176-1.418l-.371-.22-3.444.903.919-3.352-.242-.386A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+          Confirm &amp; Send on WhatsApp
+        </button>
+      </div>
+
+      <!-- RIGHT: QR Code + Instructions -->
+      <div class="modal-col-right">
+        <div class="qr-title">Scan &amp; Pay</div>
+        <div class="qr-sub">Use any UPI app to scan this QR code and pay the exact amount.</div>
+
+        <!--
+          ════════════════════════════════════════
+          HOW TO ADD YOUR QR CODE:
+          1. Copy your QR image (JPG/PNG) into
+             your  images/  folder and rename it:
+                 images/payment-qr.jpg
+          2. That's it — it will show here!
+          ════════════════════════════════════════
+        -->
+        <div class="qr-frame">
+          <img src="images/payment-qr.jpg" alt="UPI Payment QR Code"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <div class="qr-placeholder" style="display:none;">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+              <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
+              <rect x="3" y="14" width="7" height="7" rx="1"/><circle cx="17.5" cy="17.5" r="2"/>
+              <line x1="14" y1="14" x2="14.01" y2="14"/>
+            </svg>
+            <span>Place your QR image at<br><code style="font-size:.63rem;background:rgba(0,0,0,.06);padding:2px 5px;border-radius:4px;">images/payment-qr.jpg</code></span>
+          </div>
+        </div>
+
+        <div class="qr-upi-label">UPI ID</div>
+        <div class="qr-upi-id">
+          <!-- ✏️ Replace with your UPI ID -->
+          9776699638@ybl
+        </div>
+
+        <ul class="qr-steps">
+          <li><span class="qr-step-num">1</span>Open PhonePe, GPay, Paytm or any UPI app</li>
+          <li><span class="qr-step-num">2</span>Tap <strong>Scan QR</strong> and scan the code above</li>
+          <li><span class="qr-step-num">3</span>Enter the exact amount shown and confirm payment</li>
+          <li><span class="qr-step-num">4</span>Note the <strong>UTR / Transaction ID</strong> from your payment confirmation screen</li>
+          <li><span class="qr-step-num">5</span>Paste the UTR in the field on the left, then click Send</li>
+        </ul>
+      </div>
+
+    </div><!-- end .modal-cols -->
   </div>
 </div>
 
@@ -699,9 +752,9 @@
     </div>
   </div>
 
-  <!-- <p style="margin-top:18px;font-size:.8rem;color:rgba(255,255,255,.35);max-width:600px;">
+  <p style="margin-top:18px;font-size:.8rem;color:rgba(255,255,255,.35);max-width:600px;">
     💡 Tip: Replace <code style="background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;">YOUR_VIDEO_ID</code> in the HTML with your YouTube video ID to activate this player.
-  </p> -->
+  </p>
 </section>
 
 <!-- VIDEO LIGHTBOX -->
@@ -779,6 +832,7 @@
     document.getElementById('buyName').value = '';
     document.getElementById('buyAddress').value = '';
     document.getElementById('buyEmail').value = '';
+    document.getElementById('buyUTR').value = '';
     document.getElementById('buyModal').classList.add('open');
     document.body.style.overflow = 'hidden';
   }
@@ -793,15 +847,18 @@
     const name    = document.getElementById('buyName').value.trim();
     const address = document.getElementById('buyAddress').value.trim();
     const email   = document.getElementById('buyEmail').value.trim();
+    const utr     = document.getElementById('buyUTR').value.trim();
     if (!name || !email) { alert('Please fill in your name and email.'); return; }
+    if (!utr) { alert('Please enter your UTR / Transaction ID after completing payment.'); return; }
     const msg = encodeURIComponent(
-      '🛒 *New Purchase Request — PowerCloud Bill*\n\n' +
+      '🛒 *New Purchase — PowerCloud Bill*\n\n' +
       '📦 Plan: ' + currentPlan.name + '\n' +
       '💰 Price: ' + currentPlan.price + '\n\n' +
       '👤 Name: ' + name + '\n' +
       '📍 Address: ' + (address || 'Not provided') + '\n' +
-      '📧 Email: ' + email + '\n\n' +
-      'Please process my license. Thank you!'
+      '📧 Email: ' + email + '\n' +
+      '🔖 UTR / Transaction ID: ' + utr + '\n\n' +
+      'Payment done. Please activate my license. Thank you!'
     );
     closeBuyModal();
     window.open('https://wa.me/917008373783?text=' + msg, '_blank');
